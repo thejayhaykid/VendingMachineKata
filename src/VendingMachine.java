@@ -6,6 +6,7 @@ public class VendingMachine {
 	private int numNickels;
 	private int numDimes;
 	private int numQuarters;
+	private int paymentAmount;
 	private HashMap<String, Integer> inventory;
 	private HashMap<String, Float> prices;
 	
@@ -16,6 +17,8 @@ public class VendingMachine {
 		numNickels = 10;
 		numDimes = 10;
 		numQuarters = 10;
+		
+		paymentAmount = 0;
 		
 		inventory = new HashMap<String, Integer>();
 		prices = new HashMap<String, Float>();
@@ -75,5 +78,12 @@ public class VendingMachine {
 		} else {
 			return false;
 		}
+	}
+
+	public void addCoins(int nickels, int dimes, int quarters) {
+		paymentAmount = ((nickels * 5) + (dimes * 10) + (quarters * 25));
+		numNickels += nickels;
+		numDimes += dimes;
+		numQuarters += quarters;
 	}
 }

@@ -31,4 +31,11 @@ public class VendingMachineTest {
 		assertEquals(25, machine1.getInventory("cola"));
 	}
 
+	@Test
+	public void TestAcceptCoins() {
+		machine1.addCoins(0, 2, 2);
+		assertEquals(10, machine1.getNumNickels());
+		assertEquals(12, machine1.getNumDimes());
+		assertEquals(12, machine1.getNumQuarters());
+	}
 }

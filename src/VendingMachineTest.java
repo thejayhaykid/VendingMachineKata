@@ -24,7 +24,6 @@ public class VendingMachineTest {
 	
 	@Test
 	public void TestAddInventory() {
-		//TODO: Setup test
 		assertEquals(20, machine1.getInventory("cola"));
 		boolean tester = machine1.addInventory("cola", 5);
 		assertTrue(tester);
@@ -37,5 +36,21 @@ public class VendingMachineTest {
 		assertEquals(10, machine1.getNumNickels());
 		assertEquals(12, machine1.getNumDimes());
 		assertEquals(12, machine1.getNumQuarters());
+	}
+	
+	@Test
+	public void TestMakeChange() {
+		assertEquals("1 1 3", machine1.makeChange(90));
+		assertEquals("0 0 8", machine1.makeChange(200));
+	}
+	
+	@Test
+	public void TestSoldOut() {
+		for (int i = 0; i < 20; i++){
+			machine1.addCoins(0, 0, 4);
+			machine1.buyItem("cola");
+		}
+		assertEquals(0, machine1.getInventory("cola"));
+		assertFalse(machine1.buyItem("cola"));
 	}
 }

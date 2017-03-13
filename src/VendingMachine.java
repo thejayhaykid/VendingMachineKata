@@ -45,5 +45,16 @@ public class VendingMachine {
 		
 		return retMap;
 	}
+
+	public int getNumNickles(){
+		return numNickles;
+	}
 	
+	public int getNumDimes(){
+		return numDimes;
+	}
+	
+	public int getNumQuarters(){
+		return numQuarters;
+	}
 }

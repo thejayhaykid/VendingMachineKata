@@ -14,14 +14,21 @@ public class VendingMachineTest {
 	
 	@Test
 	public void TestInitializer() {
-		assertEquals(10, machine1.getNumNickles());
+		assertEquals(10, machine1.getNumNickels());
 		assertEquals(10, machine1.getNumDimes());
 		assertEquals(10, machine1.getNumQuarters());
+		assertEquals(20, machine1.getInventory("cola"));
+		assertEquals(20, machine1.getInventory("chips"));
+		assertEquals(20, machine1.getInventory("candy"));
 	}
 	
 	@Test
 	public void TestAddInventory() {
 		//TODO: Setup test
+		assertEquals(20, machine1.getInventory("cola"));
+		boolean tester = machine1.addInventory("cola", 5);
+		assertTrue(tester);
+		assertEquals(25, machine1.getInventory("cola"));
 	}
 
 }

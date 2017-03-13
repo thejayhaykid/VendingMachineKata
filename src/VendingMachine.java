@@ -3,7 +3,7 @@ import java.util.*;
 
 public class VendingMachine {
 	//Global Variables
-	private int numNickles;
+	private int numNickels;
 	private int numDimes;
 	private int numQuarters;
 	private HashMap<String, Integer> inventory;
@@ -13,7 +13,7 @@ public class VendingMachine {
 	//Vending Machine Constructor
 	public VendingMachine() {
 		//When created, vending machine will have 10 of each coin
-		numNickles = 10;
+		numNickels = 10;
 		numDimes = 10;
 		numQuarters = 10;
 		
@@ -46,15 +46,34 @@ public class VendingMachine {
 		return retMap;
 	}
 
-	public int getNumNickles(){
-		return numNickles;
+	//Get private int for number of Nickels
+	public int getNumNickels(){
+		return numNickels;
 	}
 	
+	//Get private int for number of Dimes
 	public int getNumDimes(){
 		return numDimes;
 	}
 	
+	//Get private int for number of Quarters
 	public int getNumQuarters(){
 		return numQuarters;
+	}
+	
+	//Get inventory amount based on type
+	public int getInventory(String item){
+		return inventory.get(item);
+	}
+	
+	public boolean addInventory(String item, int amount){
+		if (inventory.containsKey(item)){
+			int itemAmount = inventory.get(item);
+			itemAmount += amount;
+			inventory.replace(item, itemAmount);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

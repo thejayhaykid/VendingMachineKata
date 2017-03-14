@@ -97,39 +97,75 @@ public class VendingMachine {
 		int dimes = 0;
 		int quarters = 0;
 		String retVal = "";
-		
 		while (leftover > 0) {
-			if (leftover >= 25) { 
+			if (leftover >= 25 && numQuarters > 0) { 
 				leftover -= 25;
 				quarters++;
-			} else if (leftover >= 10) {
+				numQuarters--;
+			} else if (leftover >= 10 && numDimes > 0) {
 				leftover -= 10;
 				dimes++;
-			} else {
+				numDimes--;
+			} else if (leftover >= 5 && numNickels > 0){
 				leftover -= 5;
 				nickels++;
+				numNickels--;
+			} else {
+				System.out.println("Unable to make change.");
 			}
 		}
-		
-		numNickels -= nickels;
-		numDimes -= dimes;
-		numQuarters -= quarters;
-		
+
 		retVal = nickels + " " + dimes + " " + quarters;
+		updateExactChange();
+		paymentAmount = 0;
 		return retVal;
 	}
 
+	private void printChange(String change) {
+		System.out.println("Your change is: ");
+		String[] coins = change.split(" ");
+		System.out.println("\tNickels: " + coins[0]);
+		System.out.println("\tDimes: " + coins[1]);
+		System.out.println("\tQuarters: " + coins[2]);
+	}
+	
 	//Dispense food or return false if sold out.
 	protected boolean buyItem(String item) {
 		if(inventory.get(item) > 0) {
-			int temp = inventory.get(item);
-			temp--;
-			inventory.replace(item, temp);
-			return true;
+			if (paymentAmount >= prices.get(item)){
+				int temp = inventory.get(item);
+				temp--;
+				inventory.replace(item, temp);
+				String change = makeChange(paymentAmount - prices.get(item));
+				printChange(change);
+				return true;
+			} else {
+				System.out.println("Add more coins");
+				return false;
+			}
 		} else {
+			System.out.println("SOLD OUT");
 			return false;
 		}
 	}
 	
+	//Allowing for exact change setting to be changed
+	private void updateExactChange() {
+		if (numNickels <= 2 || numDimes <= 2 || numQuarters <= 4) {
+			exactChange = true;
+		} else {
+			exactChange = false;
+		}
+	}
+	
+	//exactChange is a private variable
+	public boolean getExactChange() {
+		return exactChange;
+	}
+	
+	//Get payment amount
+	public int getPaymentAmount() {
+		return paymentAmount;
+	}
 	
 }

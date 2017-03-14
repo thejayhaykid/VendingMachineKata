@@ -41,6 +41,7 @@ public class VendingMachineTest {
 	@Test
 	public void TestMakeChange() {
 		assertEquals("1 1 3", machine1.makeChange(90));
+		machine1.addCoins(0, 0, 10);
 		assertEquals("0 0 8", machine1.makeChange(200));
 	}
 	
@@ -56,6 +57,8 @@ public class VendingMachineTest {
 
 	@Test
 	public void TestExactChangeOnly() {
-		
+		machine1.makeChange(300);
+		assertTrue(machine1.getExactChange());
 	}
+
 }

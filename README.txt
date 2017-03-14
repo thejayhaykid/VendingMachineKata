@@ -1,0 +1,1 @@
+To run this solution you can either run the VendingMachineTest.java file or using the UserInteraction() method within VendingMachine.java

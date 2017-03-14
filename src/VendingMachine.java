@@ -168,4 +168,48 @@ public class VendingMachine {
 		return paymentAmount;
 	}
 	
+	@SuppressWarnings("resource")
+	private void acceptCoins() {
+		Scanner in = new Scanner(System.in);
+		System.out.print("How many nickels: ");
+		int nickels = in.nextInt();
+		System.out.print("How many dimes: ");
+		int dimes = in.nextInt();
+		System.out.print("How many quarters: ");
+		int quarters = in.nextInt();
+		addCoins(nickels, dimes, quarters);
+	}
+	
+	@SuppressWarnings("resource")
+	private void makeSelection() {
+		Scanner in = new Scanner(System.in);
+		boolean goodChoice = true;
+		do {
+			System.out.print("Would you like cola, candy, or chips? ");
+			String item = in.nextLine();
+			item = item.toLowerCase();
+			if (item != "cola" || item != "candy" || item != "chips") {
+				goodChoice = false;
+				System.out.println("INVALID SELECTION");
+			} else {
+				goodChoice = true;
+				buyItem(item);
+			}
+		} while (!goodChoice);
+	}
+	
+	//Main customer interaction
+	@SuppressWarnings("resource")
+	public void userInteraction() {
+		Scanner in = new Scanner(System.in);
+		char answer = 'n';
+		do {
+			acceptCoins();
+			makeSelection();
+			System.out.print("Buy another item? (y or n) ");
+			answer = in.next().charAt(0);
+		} while (answer == 'y' || answer == 'Y');
+	}
+
+	
 }

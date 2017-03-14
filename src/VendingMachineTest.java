@@ -53,4 +53,9 @@ public class VendingMachineTest {
 		assertEquals(0, machine1.getInventory("cola"));
 		assertFalse(machine1.buyItem("cola"));
 	}
+
+	@Test
+	public void TestExactChangeOnly() {
+		
+	}
 }

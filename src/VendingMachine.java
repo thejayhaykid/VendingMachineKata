@@ -7,6 +7,7 @@ public class VendingMachine {
 	private int numDimes;
 	private int numQuarters;
 	private int paymentAmount;
+	private boolean exactChange;
 	private HashMap<String, Integer> inventory;
 	private HashMap<String, Integer> prices;
 	
@@ -19,6 +20,7 @@ public class VendingMachine {
 		numQuarters = 10;
 		
 		paymentAmount = 0;
+		exactChange = false;
 		
 		inventory = new HashMap<String, Integer>();
 		prices = new HashMap<String, Integer>();
@@ -109,12 +111,16 @@ public class VendingMachine {
 			}
 		}
 		
+		numNickels -= nickels;
+		numDimes -= dimes;
+		numQuarters -= quarters;
+		
 		retVal = nickels + " " + dimes + " " + quarters;
 		return retVal;
 	}
 
 	//Dispense food or return false if sold out.
-	public boolean buyItem(String item) {
+	protected boolean buyItem(String item) {
 		if(inventory.get(item) > 0) {
 			int temp = inventory.get(item);
 			temp--;
